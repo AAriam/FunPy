@@ -17,7 +17,7 @@ def update_cell(cell, num_neighbors):
     
     Returns
     -------
-        0 (the cell dies) or 1 (the cell lives)
+        0 (the cell becomes/remains dead) or 1 (the cell becomes/remains alive)
     """
     if num_neighbors == 3:
         return 1
@@ -48,10 +48,11 @@ def update_grid(grid, periodic_boundary=True):
     
     # expand grid 
     if periodic_boundary:
-        #for periodic boundary conditions
+        # for periodic boundary conditions
         grid = np.column_stack((grid[:,-1], grid, grid[:,0])) # add right column to left, and left column to right
         grid = np.vstack((grid[-1], grid, grid[0])) # add top row to bottom and bottom row to top
     else:
+        # for non-periodic (i.e. absolute) boundaries
         temp_grid = np.zeros((shape[0]+2, shape[1]+2))
         temp_grid[1:-1,1:-1] = grid
         grid = temp_grid
@@ -66,13 +67,13 @@ def update_grid(grid, periodic_boundary=True):
             num_neighbors = np.sum(sub_grid) - cell 
             # update the corresponding cell and fill the value in new grid
             new_grid[i,j] = update_cell(cell, num_neighbors) 
-    
     return new_grid
 
 
 def create_game(grid, periodic_boundary=True):
     """
     Create a generator object that returns the new generation of the grid in each call.
+    Note: The first call returns the initial grid.
     
     Parameters
     ----------
@@ -83,7 +84,6 @@ def create_game(grid, periodic_boundary=True):
     -------
         generator object
         Infinite generator that returns the next generation grid (2-dim. binary numpy array) after each call.
-        Note: The first call returns the initial grid.
     """
     # raise error if the grid contains non-binary values
     if not np.array_equal(grid, grid.astype(bool)):
@@ -93,4 +93,10 @@ def create_game(grid, periodic_boundary=True):
         yield grid
         grid = update_grid(grid, periodic_boundary)
 
-        
+
+def run_game(grid, num_generations=200, periodic_boundary=True):
+    game = create_game(grid, periodic_boundary)
+    results = np.zeros((num_generations, grid.shape[0], grid.shape[1]))
+    for i in range(num_generations):
+        results[i] = game.send(None)
+    return results

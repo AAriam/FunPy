@@ -1,5 +1,6 @@
 import numpy as np
 
+
 GLIDER = np.array([[1, 0, 1],
                    [0, 1, 1],
                    [0, 1, 0]])
@@ -28,7 +29,7 @@ BLINKER = np.array([[1,1,1]])
 
 
 
-def create_grid_with_pattern(pattern, grid_width=100, grid_height=100):
+def create_grid_with_pattern(pattern, grid_width=50, grid_height=50):
     """
     Take a pattern (e.g. glider, beacon) and create a grid with the pattern in the middle.
     
