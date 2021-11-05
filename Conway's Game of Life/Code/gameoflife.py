@@ -95,6 +95,27 @@ def create_game(grid, periodic_boundary=True):
 
 
 def run_game(grid, num_generations=200, periodic_boundary=True):
+    """
+    Run a game for a given numbers of generations and return all the generations.
+    
+    Parameters
+    ----------
+    grid : numpy array (2-dimensional, binary)
+        The initial state of the grid (world), where each element is a cell either dead (0) or alive (1).
+    
+    num_generations : int
+        The number of generations to simulate in the game.
+    
+    periodic_boundary : bool
+        Whether to use periodic boundary conditions or absolute boundaries for the grid.
+    
+    Returns
+    -------
+        numpy array (3-dimensional, binary)
+        The progression of the initial grid for the given number of generations.
+        Each element of the array is itself a 2-dim. array corresponding to the state of the grid.
+        The index corresponds to the generation number. E.g. the first element (index 0) is the initial input grid.
+    """
     game = create_game(grid, periodic_boundary)
     results = np.zeros((num_generations, grid.shape[0], grid.shape[1]))
     for i in range(num_generations):

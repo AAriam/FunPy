@@ -1,5 +1,6 @@
 import numpy as np
 
+BLINKER = np.array([[1,1,1]])
 
 GLIDER = np.array([[1, 0, 1],
                    [0, 1, 1],
@@ -23,9 +24,6 @@ BEACON = np.array([ [1, 1, 0, 0],
 
 ONE_LINER = np.array([
 [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1]])
-
-
-BLINKER = np.array([[1,1,1]])
 
 
 
