@@ -1,3 +1,8 @@
+# Module contains all the necessary functions to run the Game of Life.
+# Each function builds upon its previous function.
+# In general, in order to create and run a game, you only need to use the last function: run_game
+
+
 import numpy as np
 
 def update_cell(cell, num_neighbors):

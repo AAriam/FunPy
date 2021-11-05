@@ -1,3 +1,7 @@
+# Module contains some known patterns in the Game of Life,
+# plus a function that takes a pattern and places it 
+# in the middle of a grid with a given size.
+
 import numpy as np
 
 BLINKER = np.array([[1,1,1]])
