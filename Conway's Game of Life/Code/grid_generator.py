@@ -423,18 +423,9 @@ def create_grid_with_pattern(
     grid : numpy.ndarray
         A grid with the given dimensions and the pattern in the middle (otherwise empty). 
     """
-    
-    grid = np.zeros((grid_width, grid_height))
-    
-    pattern_width = pattern.shape[0]
-    pattern_height = pattern.shape[1]
-    
-    start_col = grid_width//2 - pattern_width//2
-    start_row = grid_height//2 - pattern_height//2
-    
-    end_col = start_col + pattern_width
-    end_row = start_row + pattern_height
-    
-    grid[start_col:end_col, start_row:end_row] = pattern
-    
+    grid = np.zeros(shape=(grid_width, grid_height), dtype=np.bool_)
+    pattern_dims = np.array(pattern.shape)
+    start = np.array([grid_width, grid_height]) // 2 - pattern_dims // 2
+    end = start + pattern_dims
+    grid[start[0]:end[0], start[1]:end[1]] = pattern
     return grid
