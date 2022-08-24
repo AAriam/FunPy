@@ -429,3 +429,7 @@ def create_grid_with_pattern(
     end = start + pattern_dims
     grid[start[0]:end[0], start[1]:end[1]] = pattern
     return grid
+
+
+def create_grid_random(grid_width: int = 50, grid_height: int = 50) -> np.ndarray:
+    return np.random.randint(low=0, high=2, size=(grid_width, grid_height), dtype=np.bool_)
