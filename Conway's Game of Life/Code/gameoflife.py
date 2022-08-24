@@ -28,12 +28,7 @@ def update_cell(cell: np.bool_, num_neighbors: np.int_) -> np.bool_:
     numpy.bool_
         0 (the cell becomes/remains dead) or 1 (the cell becomes/remains alive)
     """
-    if num_neighbors == 3:
-        return 1
-    elif num_neighbors == 2 and cell == 1:
-        return 1
-    else:
-        return 0
+    return (cell & (num_neighbors == 2)) | (num_neighbors == 3)
 
 
 def update_grid(grid: np.ndarray, periodic_boundary: bool = True) -> np.ndarray:
